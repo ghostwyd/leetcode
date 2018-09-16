@@ -10,9 +10,17 @@ struct ListNode {
 void print_list(struct ListNode *head);
 
 struct ListNode* reverseKGroup(struct ListNode* head, int k) {
-	if (k == 1 || head == NULL) {
+	if (k <= 0) {
 		return head;
-	} 
+	}
+
+    	struct ListNode *tmp_node = head;
+    	int list_len = 0;
+	while(tmp_node != NULL)	{
+		++list_len;
+		tmp_node = tmp_node->next;
+	}
+	int group_count = list_len / k; 	
 
 	struct ListNode *new_head = head;
 	struct ListNode *pre_node = head;
@@ -21,20 +29,7 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k) {
 	struct ListNode *last_group_tail = NULL;
 	int first = 1;
 
-	while (1) {
-		struct ListNode *tmp_node = cur_node;
-		int length_enough = 1;
-
-		for (int i =0; i < (k-1); ++i) {
-			if (tmp_node == NULL) {
-				length_enough = 0;
-				break;
-			}
-			tmp_node = tmp_node->next;
-		}
-		if (!length_enough) {
-			break;
-		}
+	for (int j =0; j < group_count; ++j) {
 		for (int i = 0 ; i < (k-1) && cur_node != NULL; ++i) {
 			pre_node->next = cur_node->next;		
 			cur_node->next = cur_head;
@@ -78,7 +73,7 @@ int main(void) {
 	head->next = NULL;
 
 	struct ListNode *cur_node = head;
-        for (int i = 0; i < 30; ++i) { 
+        for (int i = 0; i < 27; ++i) { 
 		struct ListNode *node = (struct ListNode*)malloc(sizeof(struct ListNode));
 		node->val = i + 1;
 		node->next = NULL;
