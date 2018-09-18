@@ -3,11 +3,9 @@
 #include <unistd.h>
 #include <assert.h>
 
-typedef struct ListNode{
-	int data;
-	struct ListNode *next;
-}ListNode;
+#include "list_node.h"
 
+typedef struct ListNode ListNode;
 void print_list(ListNode *head);
 
 /*
@@ -43,7 +41,7 @@ ListNode* resort_list(ListNode *head) {
 	ListNode *even_ptr = head;
 	ListNode *final_ptr = NULL;
 	ListNode *final_head = NULL;
-	if (odd_ptr->data < even_ptr->data) {
+	if (odd_ptr->val < even_ptr->val) {
 		final_head = odd_ptr;
 		odd_ptr = odd_ptr->next;
 	} else {
@@ -54,7 +52,7 @@ ListNode* resort_list(ListNode *head) {
 	final_ptr->next = NULL;
 	
 	while (odd_ptr && even_ptr) {
-		if (odd_ptr->data > even_ptr->data) {
+		if (odd_ptr->val> even_ptr->val) {
 		    	final_ptr->next = even_ptr;
 			even_ptr = even_ptr->next;
 						
@@ -79,11 +77,11 @@ void print_list(ListNode *head) {
 		return;
 	}
 	ListNode *ptr = head->next;
-	printf("%d\n", head->data);
+	printf("%d\n", head->val);
 	ListNode *pre = head;
 	while(ptr != NULL) {
-		printf("%d\n", ptr->data);
-		if (pre->data > ptr->data) {
+		printf("%d\n", ptr->val);
+		if (pre->val> ptr->val) {
 			printf("wrong!\n");
 			assert(0);
 		}
@@ -96,7 +94,7 @@ int main(void) {
 
 	ListNode *head = (ListNode*)malloc(sizeof(ListNode));
 	head->next = NULL;
-	head->data = 0;
+	head->val= 0;
 	ListNode *ptr = head;
 
 	int increase = 0;
@@ -104,9 +102,9 @@ int main(void) {
 	for (int i = 0; i < max; ++i) {
 	    	ListNode *node = (ListNode*)malloc(sizeof(ListNode));
 		if (increase) {
-			node->data = i + 30;
+			node->val = i + 30;
 		} else {
-			node->data = 10 - i;
+			node->val = 10 - i;
 		}
 		ptr->next = node;
 		node->next = NULL;
