@@ -3,11 +3,12 @@
 #include <sys/types.h>
 #include "list_node.h"
 
-struct ListNode* reverseKGroup(struct ListNode* head, int k) {
-    if (k <= 0) {
+//https://leetcode-cn.com/problems/swap-nodes-in-pairs/description/
+struct ListNode* swapPairs(struct ListNode* head) {
+    int k = 2;
+    if (!head) {
         return head;
     }
-
     struct ListNode *tmp_node = head;
     int list_len = 0;
     while(tmp_node != NULL)	{
@@ -48,22 +49,7 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k) {
     return new_head;
 }
 
-int main(void) {
-    int item_count_in_group = 4;
-    struct ListNode	*head = (struct ListNode*)malloc(sizeof(struct ListNode));
-    head->val = 0;
-    head->next = NULL;
-
-    struct ListNode *cur_node = head;
-    for (int i = 0; i < 27; ++i) { 
-        struct ListNode *node = (struct ListNode*)malloc(sizeof(struct ListNode));
-        node->val = i + 1;
-        node->next = NULL;
-        cur_node->next = node;
-        cur_node = node;
-    }
-    struct ListNode *new_head = reverseKGroup(head, item_count_in_group);
-    assert(new_head != NULL);
-    print_list(new_head);
-    return EXIT_SUCCESS;
+int main()
+{
+    return 0;
 }
