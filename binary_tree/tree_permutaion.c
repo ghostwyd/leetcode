@@ -15,7 +15,6 @@ int numTrees(int n) {
         array[i] = 0;
         for (int j = 0; j < i; ++j) {
             array[i] += array[j] * array[i-j-1];
-//            printf("array[%d]=%d\n", i, array[i]);
         }
     }
 

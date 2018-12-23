@@ -12,11 +12,8 @@ int divide(int dividend, int divisor) {
         return INT_MAX;
     }
 
-    if (divisor == 1) {
-        return dividend;
-    }
-    if (divisor == -1) {
-        return 0-dividend;
+    if (divisor == 1 || divisor == -1) {
+        return dividend*divisor;
     }
 
     int factor = 1;
