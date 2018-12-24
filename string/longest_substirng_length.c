@@ -22,9 +22,8 @@ int lengthOfLongestSubstring(const char* s) {
                 longest = i - start;
             }
             start = flag[index] + 1;
-        }
+        } 
         flag[index] = i;
-
     }
     if  (len - start > longest) {
         longest = len - start;

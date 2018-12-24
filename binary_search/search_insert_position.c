@@ -19,6 +19,7 @@ int searchInsert(int* nums, int numsSize, int target) {
     return start;
 }
 
+
 int main(void)
 {
     int nums[] = {1,3,5,6};    
