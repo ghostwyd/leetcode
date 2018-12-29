@@ -3,22 +3,6 @@
 
 #include "list_node.h"
 
-struct ListNode* reverse(struct ListNode* head)
-{
-    if (!head || head->next == NULL) {
-        return head;
-    }
-    struct ListNode *new_head = head; 
-    struct ListNode *cur = head->next;
-    new_head->next = NULL;
-    while (cur != NULL) {
-        struct ListNode *tmp = cur->next;
-        cur->next = new_head;
-        new_head = cur;
-        cur = tmp;
-    }
-    return new_head;
-}
 //https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
    struct ListNode *a = reverse(headA); 
@@ -36,4 +20,42 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
    reverse(a);
    reverse(b);
    return common_ptr;
+}
+
+struct ListNode *getIntersectionNodeII(struct ListNode *headA, struct ListNode *headB) {
+    int len1 = 0;
+    int len2 = 0;
+    int sub = 0;
+    struct ListNode *cur1 = headA;
+    struct ListNode *cur2 = headB;
+    while (cur1 != NULL) {
+        ++len1;
+        cur1 = cur1->next;
+    }
+    while (cur2 != NULL) {
+        ++len2;
+        cur2 = cur2->next;
+    }
+    if (len1 > len2) {
+        sub = len1 - len2;
+        cur1 = headA;
+        cur2 = headB;
+    } else {
+       sub = len2 - len1; 
+       cur1 = headB;
+       cur2 = headA;
+    }
+    
+    while(sub > 0) {
+        cur1 = cur1->next;
+        sub--;
+    }
+    while(cur1 != NULL && cur2 != NULL) {
+        if (cur1 == cur2) {
+            return cur1;
+        }
+        cur1 = cur1->next;
+        cur2 = cur2->next;
+    }
+    return NULL;
 }

@@ -46,3 +46,20 @@ void print_list(struct ListNode *head) {
     printf("\n");
     printf("node count:%d\n", count);
 }
+
+struct ListNode* reverse(struct ListNode* head)
+{
+    if (!head || head->next == NULL) {
+        return head;
+    }
+    struct ListNode *new_head = head; 
+    struct ListNode *cur = head->next;
+    new_head->next = NULL;
+    while (cur != NULL) {
+        struct ListNode *tmp = cur->next;
+        cur->next = new_head;
+        new_head = cur;
+        cur = tmp;
+    }
+    return new_head;
+}
